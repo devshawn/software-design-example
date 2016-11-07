@@ -15,7 +15,6 @@ COPY ./dist/ /usr/src/app/
 
 # must match linked container
 ENV MONGODB_URI=mongo
-ENV SEED_DB=true
 
 CMD ["npm", "start"]
 

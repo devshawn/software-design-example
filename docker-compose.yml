@@ -8,6 +8,8 @@ services:
      - mongo
     networks:
      - internal
+    environment:
+     - SEED_DB=true
   mongo:
     image: mongo
     networks:
