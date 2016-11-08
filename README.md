@@ -9,7 +9,13 @@ The Dockerfile included builds Docker containers based on the built application.
 $ gulp build
 ```
 
-This builds the whole application and throws it in the `dist` directory, which is what the Dockerfile looks for.
+This builds the whole application and throws it in the `dist` directory, which is what the Dockerfile looks for. You would also need to rebuild the Docker Compose images with:
+
+```
+$ docker-compose build
+```
+
+This is because your `dist` files changed and the image needs them.
 
 ## Spin up the production application with seeded database
 
@@ -44,5 +50,19 @@ $ docker-compose -f docker-compose-external-db.yml up
 ```
 
 Visit [http://localhost:8080][local] to see the hosted website. There should be no "features" listed, because the newly created database is empty (rather than seeded as before).
+
+## Running a clean build of the current git repository
+
+It is beneficial to not have to have the repository cloned and running `gulp build` before every docker-compose command. In the `CLEAN_DEPLOY` directory, we've included an example in which all you need is the Docker Compose file and a Dockerfile.
+
+Move to the `CLEAN_DEPLOY` directory and run the following:
+
+```
+$ docker-compose up
+```
+
+This should clone the repository, build the application, and start the server and database.
+
+You could then stop it and run it again and it will pull any new changes and run the server. Thus, this would always give you the latest version of your application (according to your hosted git repository).
 
 [local]: http://localhost:8080
